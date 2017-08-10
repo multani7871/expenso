@@ -9,7 +9,7 @@ class App extends Component {
           <h2>Expenso!</h2>
         </div>
         <p className="App-intro">
-          Track your expenses easily!
+          Enter your transactions below to easily track your spending!
         </p>
       </div>
     );
