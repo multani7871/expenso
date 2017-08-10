@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import NewExpense from './NewExpense.js'
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <p className="App-intro">
           Enter your transactions below to easily track your spending!
         </p>
+        <NewExpense />
       </div>
     );
   }
