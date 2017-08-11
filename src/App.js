@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NewExpense from './NewExpense.js'
+import ExpenseList from './ExpenseList.js'
 
 class App extends Component {
   render() {
@@ -9,10 +10,13 @@ class App extends Component {
         <div className="App-header">
           <h2>Expenso!</h2>
         </div>
-        <p className="App-intro">
+        <p className="Instructions">
           Enter your transactions below to easily track your spending!
         </p>
         <NewExpense />
+        <div>
+          <ExpenseList />
+        </div>
       </div>
     );
   }
