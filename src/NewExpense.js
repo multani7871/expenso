@@ -1,21 +1,48 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 class NewExpense extends Component {
   constructor(props) {
     super(props);
-    this.state = {date: '', merchant: '', amount: ''};
+    this.state = {
+      date: '',
+      merchant: '',
+      amount: 0
+    };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleMerchantChange = this.handleMerchantChange.bind(this);
+    this.handleAmountChange = this.handleAmountChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleDateChange(event) {
+    this.setState({date: event.target.value});
+  }
+
+  handleMerchantChange(event) {
+    this.setState({merchant: event.target.value});
+  }
+
+  handleAmountChange(event) {
+    this.setState({amount: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('An expense was submitted: ' + this.state.value);
     event.preventDefault();
+
+    var data = {
+      date: this.state.date,
+      merchant: this.state.merchant,
+      amount: this.state.amount
+    };
+
+    $.post('/expenses', {
+      data: data
+    }).done((str) => {
+      this.forceUpdate();
+      console.log((`Submitted: ${JSON.stringify(this.state)}`));
+    });
   }
 
   render() {
@@ -23,9 +50,9 @@ class NewExpense extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Enter New Expense: <br />
-          <input type='text' value={this.state.date} onChange={this.handleChange} placeholder="date" />
-          <input type='text' value={this.state.merchant} onChange={this.handleChange} placeholder="merchant" />
-          <input type='text' value={this.state.amount} onChange={this.handleChange} placeholder="amount" />
+          <input type='text' onChange={this.handleDateChange} placeholder='date' />
+          <input type='text' onChange={this.handleMerchantChange} placeholder='merchant' />
+          <input type='text' onChange={this.handleAmountChange} placeholder='amount' />
           <button>
             Add expense
           </button>
